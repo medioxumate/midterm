@@ -1,0 +1,12 @@
+{
+  "name": "tokiehn/328/midterm",
+  "authors": [
+  {
+    "name": "Brian Kiehn",
+    "email": "bkiehn@greenriver.mail.edu"
+  }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
