@@ -38,22 +38,30 @@ $f3->route('GET /', function(){
     echo $view->render('views/survey.html');
 });
 
-$f3->route('GET /survey', function(){
+$f3->route('GET|POST /survey', function($f3){
     //display a view
     $view = new Template();
+    if (!empty($_POST['survey'])
+        && isset($_POST['name']) && !empty($_POST['name'])){
+        $_SESSION['name'] = $_POST['name'];
+        $_SESSION['survey'] = $_POST['survey'];
+    }
+
+    else {
+        if (empty($_POST['survey'])) {
+            $f3->set("errors['survey']", "error: Must check at least one box");
+        }
+        if (!isset($_POST['name']) && !empty($_POST['name'])){
+            $f3->set("errors['name']", "error: Name field must be filled");
+        }
+    }
+
     echo $view->render('views/midterm.html');
 });
 
 $f3->route('GET|POST /results', function(){
     //display a view
     $view = new Template();
-
-    if (isset($_POST['survey']) && !empty($_POST['survey'])
-        && isset($_POST['name']) && !empty($_POST['name'])) {
-
-        $_SESSION['survey'] = $_POST['survey'];
-        $_SESSION['name'] = $_POST['name'];
-    }
 
     echo $view->render('views/results.html');
 });
