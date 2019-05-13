@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Midterm Survey</title>
+</head>
+<body>
+    <h1>Midterm Survey</h1>
+    <form method ="post" action ="results">
+        <label>Name: <input type ="text"></label>
+        <p>check all that apply:</p>
+        <repeat group ="{{ @questions }}" value ="@options">
+            <label><input type ="checkbox" name ="survey[]" value ="{{ @options }}">{{ @options }}</label>
+            <br>
+        </repeat>
+        <button type ="submit">Submit</button>
+    </form>
+</body>
+</html>
