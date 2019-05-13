@@ -7,10 +7,16 @@
 <body>
     <h1>Midterm Survey</h1>
     <form method ="post" action ="#">
-        <label>Name: <input type ="text" name ="name"></label>
+        <label>Name: <input type ="text" name ="name" value="{{ @name }}">
+            <check if="{{ isset(@errors['name']) }}">
+                <span class="err">{{ @errors['name'] }}</span>
+            </check>
         <p>check all that apply:</p>
         <repeat group ="{{ @questions }}" value ="@options">
-            <label><input type ="checkbox" name ="survey[]" value ="{{ @options }}">{{ @options }}</label>
+            <label><input type ="checkbox" name ="survey[]" value ="{{ @options }}"
+                <check if="{{ !empty($_POST['survey']) && in_array(@options, $_POST['survey']) }}">
+                    checked="checked"
+                </check>>{{ @options }}</label>
             <br>
         </repeat>
         <button type ="submit">Submit</button>
