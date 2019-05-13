@@ -44,5 +44,18 @@ $f3->route('GET /survey', function(){
     echo $view->render('views/midterm.html');
 });
 
+$f3->route('GET|POST /results', function(){
+    //display a view
+    $view = new Template();
+
+    if (isset($_POST['survey']) && !empty($_POST['survey'])
+        && isset($_POST['name']) && !empty($_POST['name'])) {
+
+        $_SESSION['survey'] = $_POST['survey'];
+        $_SESSION['name'] = $_POST['name'];
+    }
+
+    echo $view->render('views/results.html');
+});
 //run Fat-free
 $f3->run();
