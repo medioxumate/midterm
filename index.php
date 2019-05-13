@@ -48,17 +48,19 @@ $f3->route('GET|POST /survey', function($f3){
         && isset($_POST['name']) && !empty($_POST['name'])){
         $_SESSION['name'] = $_POST['name'];
         $_SESSION['survey'] = $_POST['survey'];
+
+        $f3->reroute('/results');
     }
 
     else {
         if (empty($_POST['survey'])) {
             $f3->set("errors['survey']", "error: Must check at least one box");
         }
-        if (!isset($_POST['name']) && !empty($_POST['name'])){
+        if (!isset($_POST['name']) && empty($_POST['name'])){
             $f3->set("errors['name']", "error: Name field must be filled");
         }
-        $f3->set('name', $_POST['name']);
     }
+    $f3->set('name', $_POST['name']);
 
     echo $view->render('views/midterm.html');
 });
