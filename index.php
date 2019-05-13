@@ -31,6 +31,9 @@ $f3->set('DEBUG', 3);
 $f3->set('questions', array('This midterm is easy', 'I don\'t like midterms',
     'Today is Monday', 'Today is not Tuesday', 'Help! Trapped in a survey design office!', 'I used my real name'));
 
+//sticky
+$f3->set('name', '');
+
 //Define a default root
 $f3->route('GET /', function(){
     //display a view
@@ -54,6 +57,7 @@ $f3->route('GET|POST /survey', function($f3){
         if (!isset($_POST['name']) && !empty($_POST['name'])){
             $f3->set("errors['name']", "error: Name field must be filled");
         }
+        $f3->set('name', $_POST['name']);
     }
 
     echo $view->render('views/midterm.html');
